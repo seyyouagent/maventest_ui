@@ -1,22 +1,20 @@
 $(document).ready(function(){
 
-    alert(sessionStorage.getItem("token"));
+    var jdata = {"token":sessionStorage.getItem("token")};
     $.ajax({
         url:'http://localhost:8090/selectUserByToken',
-        data:{"token":sessionStorage.getItem("token")},
+        data:JSON.stringify(jdata),
         type:"POST",
         dataType:"json",
         cache:false,//false是不缓存，true为缓存
         async:true,//true为异步，false为同步
+        contentType: "application/json;charset=UTF-8",
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization','Bearer' + sessionStorage.getItem('token'));
-
         },
         success:function(data){
-            var datas = JSON.parse(data);
-            sessionStorage.setItem("token",datas['jwtToken']);
-            if(datas['status'] == 200) {
-                alert(datas);
+            if(data['status'] == 200) {
+                $("#selUname").html(data['result']);
             } else {
                 location.href = 'login.html';
             }

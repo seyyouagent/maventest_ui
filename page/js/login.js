@@ -16,7 +16,6 @@ $(document).ready(function(){
             // xhr.setRequestHeader('Access-Control-Allow-Origin','*');
             // },
             success:function(data){
-                alert(data['jwtToken']);
                 sessionStorage.setItem("token",data['jwtToken']);
                 if(data['status'] == 200) {
                     location.href = 'home.html';
