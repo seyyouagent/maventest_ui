@@ -9,7 +9,7 @@ $(document).ready(function(){
         cache:false,//false是不缓存，true为缓存
         async:true,//true为异步，false为同步
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('123123','Bearer' + sessionStorage.getItem('token'));
+            xhr.setRequestHeader('Authorization','Bearer' + sessionStorage.getItem('token'));
 
         },
         success:function(data){
